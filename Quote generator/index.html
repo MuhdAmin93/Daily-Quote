@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="style.css">
+  <title>Daily Quote</title>
+</head>
+<body>
+  
+  <div class="quote-box">
+    <h2>Quote of the day </h2>
+    <blockquote id="quote">Loading....</blockquote>
+    <span id="author">Loading....</span>
+    <div>
+      <button onclick="getquote(api_url)">New Quote</button>
+      <button onclick="tweet()"><i class="fa-brands fa-twitter"></i>Tweet</button>
+    </div>
+  </div>
+
+<script>
+  const quote = document.getElementById("quote");
+  const author = document.getElementById("author");
+  const api_url = "https://api.quotable.io/random";
+
+  async function getquote(url){
+    const response = await fetch(url);
+    var data = await response.json();
+  
+    quote.innerHTML = data.content;
+    author.innerHTML = data.author;
+  }
+
+  getquote(api_url);
+
+  function tweet(){
+    window.open("https://twitter.com/intent/tweet?text=" + quote.innerHTML + "---- by " + author.innerHTML, "Tweet Window",  "width=600, height=300");
+  }
+
+
+</script>
+
+
+</body>
+</html>
